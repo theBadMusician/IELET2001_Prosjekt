@@ -26,7 +26,7 @@ socket.on("temp-sensor-avg", data => {
   myLineChart.update(); //Updaterer grafen.*/
 })
 
-ar keyleft = document.getElementById("left"); //Here the variable kalled "keyW" is equal to the element in the HTML file with ID "w"
+var keyleft = document.getElementById("left"); //Here the variable kalled "keyW" is equal to the element in the HTML file with ID "w"
 var keyup = document.getElementById("up");
 var keyright = document.getElementById("right");
 var keydown = document.getElementById("down");
