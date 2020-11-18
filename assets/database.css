@@ -1,0 +1,56 @@
+ul{
+	list-style-type: none;
+	margin:0;
+	padding:0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	 display: block;
+	color: white;
+	left:20px;
+	right:20px;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.log-inn{
+	right: 50px;
+	position: absolute;
+	text-decoration: none;
+}
+
+.active{
+	background-color: #4CAF50;
+}
+
+h1{
+	text-align: center
+}
+
+h5{
+	color: white;
+	font-size: 25px;
+}
+.info{
+	position: absolute;
+	top:100px;
+	left:420px;
+
+}
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color:#333;
+	color: #4CAF50;
+	text-align: center;
+}
+

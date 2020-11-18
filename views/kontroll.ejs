@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control panel</title> 
+    <link rel="stylesheet" type="text/css" href="assets\kontroll.css">
+    <script src="assets/Chart.min.js"></script>
+    <title>Kontrollpanel</title>
+</head>
+<body>
+         <ul>
+            <li class="active"><a href="index.ejs">Home</a></li>
+            <li><a href="about.ejs">About</a></li>
+            <li><a href="Database.ejs">Database</a></li>
+            <li><a href="kontroll.ejs">Control panel</a></li>
+            <li class="log-inn"><a href="login.ejs">Login</a></li>
+        </ul>
+    <div class="header"><h1>Kontrollpanel side:</h1></div>
+ <div class="zumo">
+    <h5 class="overskrift">Styre zumobilen:</h5>
+    <button class="buttons" id="up">UP</button>
+    <button class="buttons" id="left">LEFT</button>
+    <button class="buttons" id="right">RIGHT</button>
+    <button class="buttons" id="down">DOWN</button>
+  </div>
+  <div class="sensor">
+    <h5 class="overskrift">Temperatur Sensor:</h5>
+      <div id="av_på_btn"><label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label></div>
+    <div class="sensor_info_1">Kontinuerlig temperatur :<p id="sensor_data">...</p></div>
+    <div class="sensor_info_2">Gj.temperatur per minutt :<p id="sensor_data_avg">...</p></div>
+  </div>
+  <div class="chart">
+    <h5 class="overskrift">Chart:</h5>
+    <canvas id="my_chart" width="450" height="175"></canvas> 
+  </div>
+  <div class="temperatur"><h5 class="overskrift">En siste Sensor?:</h5>
+  <div class="sensor_info_1">Kontinuerlig Sensordata :<p id="sensor1_data">...</p></div>
+  <div class="sensor_info_2">Gjennomsnitt sensordata :<p id="sensor1_data">...</p></div>
+</div>
+
+  <div class="footer"><h2>Gruppe 24</h2></div>
+</body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="assets/client.js"></script>
+<script src="assets/chart.js"></script>
+
+</html>

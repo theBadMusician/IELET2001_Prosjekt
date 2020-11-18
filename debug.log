@@ -1,0 +1,7 @@
+[1021/190332.316:ERROR:directory_reader_win.cc(43)] FindFirstFile: Systemet finner ikke angitt bane. (0x3)
+[1021/191815.420:ERROR:file_io.cc(90)] ReadExactly: expected 152, observed 40
+[1021/191916.527:ERROR:settings.cc(325)] Settings version is not 1
+[1021/192916.534:ERROR:directory_reader_win.cc(43)] FindFirstFile: Systemet finner ikke angitt bane. (0x3)
+[1022/183939.055:ERROR:directory_reader_win.cc(43)] FindFirstFile: Systemet finner ikke angitt bane. (0x3)
+[1025/181458.795:ERROR:directory_reader_win.cc(43)] FindFirstFile: Systemet finner ikke angitt bane. (0x3)
+[1027/103215.706:ERROR:directory_reader_win.cc(43)] FindFirstFile: Systemet finner ikke angitt bane. (0x3)
