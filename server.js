@@ -128,4 +128,24 @@ socket.on("average", data => {
   console.log("Average temp:" + data)
   socket.broadcast.emit("temp-sensor-avg", data);
     })
+  
+socket.on('zumoDirectControl', function(data) {
+    let directControlState = 0;
+    console.log(data);
+
+    // Processes the received JS object into state machine interface for easier use with ESP32
+    if ((!data.UP && !data.DOWN && !data.LEFT && !data.RIGHT) || (data.UP && data.DOWN && !data.LEFT && !data.RIGHT)) directControlState = 0;
+    else if (data.UP && !data.DOWN && !data.LEFT && !data.RIGHT) directControlState = 1;
+    else if (!data.UP && data.DOWN && !data.LEFT && !data.RIGHT) directControlState = 2;
+    else if (!data.UP && !data.DOWN && data.LEFT && !data.RIGHT) directControlState = 3;
+    else if (!data.UP && !data.DOWN && !data.LEFT && data.RIGHT) directControlState = 4;
+    else if (data.UP && !data.DOWN && data.LEFT && !data.RIGHT) directControlState = 5;
+    else if (data.UP && !data.DOWN && !data.LEFT && data.RIGHT) directControlState = 6;
+    else if (!data.UP && data.DOWN && data.LEFT && !data.RIGHT) directControlState = 7;
+    else if (!data.UP && data.DOWN && !data.LEFT && data.RIGHT) directControlState = 8;
+    else directControlState = 9;
+    socket.broadcast.emit('zumoControlToESP', directControlState);
+
+
+  })
 });
