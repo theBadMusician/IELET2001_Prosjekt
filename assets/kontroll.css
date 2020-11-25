@@ -67,6 +67,15 @@ h5{
 	height: 30%;
 	background-color: #333; 
   }
+#sign_out{
+	position: absolute;
+	top: 150px;
+	left: 620px;
+	width: 150;
+}
+#signout{
+	font-size: large;
+}
 #av_på_btn{
 	position: absolute;
 	top: 380px;

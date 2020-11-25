@@ -37,7 +37,11 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
                 return firebase.auth().signOut();
               })
               .then(() => {
-                window.location.assign("/database.ejs");
+                window.location.assign("/kontroll.ejs");
+              })
+              .catch((error) =>{
+                var error_message = error.message;
+                alert(error_message);
               });
             return false;
           });

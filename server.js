@@ -59,8 +59,8 @@ app.get('/about.ejs', (req, res) => {
   res.render('about');
 });
 
-//database html:
-app.get('/database.ejs', (req, res) => {
+//kontroll html:
+app.get('/kontroll.ejs', (req, res) => {
   console.log(Date().toString(), "Requested URL: ", req.url);
   const sessionCookie = req.cookies.session || "";
 
@@ -68,19 +68,11 @@ app.get('/database.ejs', (req, res) => {
     .auth()
     .verifySessionCookie(sessionCookie, true /** checkRevoked */)
     .then(() => {
-      res.render("database");
+      res.render("kontroll");
     })
     .catch((error) => {
       res.redirect("/login.ejs");
     });
-});
-
-//});
-
-//kontroll html:
-app.get('/kontroll.ejs', (req, res) => {
-  console.log(Date().toString(), "Requested URL: ", req.url);
-  res.render('kontroll');
 });
 
 //logg inn html:
