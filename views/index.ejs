@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="assets\index.css">
-	<title>Datakommunikasjon</title>
+	<title>sign up</title>
+	<link rel="stylesheet" href="assets/login.css">
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js" defer></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js" defer></script>
 </head>
 <body>
-		<ul>
-			<li class="active"><a href="index.ejs">Home</a></li>
-			<li><a href="about.ejs">About</a></li>
-            <li><a href="kontroll.ejs">Control panel</a></li>
-	    <li><a href="help.ejs">Help</a></li>
-			<li class="log-inn"><a href="login.ejs">Login</a></li>
-		</ul>
-	<h1>Prosjekt Datakommunikasjon!</h1>
-	<h3>Nettside for trådløs kontroll og oversikt<br> over zumo bilen og forskjellige sensorer</h3>
-	<p>Husk at hvis du vil bruke kontroll panelet<br> 
-	   må du ta i bruk våres firsebase baserte innlogging<br>
-	   for å få tilgang!</p>
-	<img class="web-img" src="assets/esp32.jpg.png">
-	<div class="footer"><h4>Gruppe 24</h4></div>	
+	<div class="Registerer-deg-form">
+		<h1>Logg på prosjektet:</h1>
+		<form id="login">
+			<input type="email" class="input-box" name ="login" placeholder="Your email">
+			<input type="password" class="input-box" name ="password" placeholder="Your password">
+			<p><span><input type="checkbox"></span>I agree to the terms for this service</p>
+			<button class="sign-btn">Sign up</button>
+			
+			<hr>
+			<p class="or">Or</p>
+			<button type="button" class="login-btn">login with Blackboard</button>
+			<hr>
+			<p>Do you not have a account?<a href="sign-in.ejs"> Sign in</a></p>
+			<p><a href="index.ejs">Home!</a></p>
+			
+		</form>
+
+	</div>
+	<script src="assets/login.js"></script>
 </body>
 </html>
