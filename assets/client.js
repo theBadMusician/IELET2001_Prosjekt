@@ -25,95 +25,115 @@ socket.on("temp-sensor-avg", data => {
   }
   myLineChart.update(); //Updaterer grafen.*/
 })
-
+const xhttp = new XMLHttpRequest();
 var keyleft = document.getElementById("left"); //Here the variable kalled "keyW" is equal to the element in the HTML file with ID "w"
 var keyup = document.getElementById("up");
 var keyright = document.getElementById("right");
 var keydown = document.getElementById("down");
- 
-document.onkeypress = function(event) { //This checks constantly if, while on the webpage, the user presses down a button
-keyDown(event); //If a user does press down a button the "event" variable fetches which button it is and passes it to the function "keyDown" as an argument
-};
 
-document.onkeyup = function(event) { //This checks constantly if, while on the webpage, the user lets go of a button (it goes up and not down)
-    keyUp(event); //If a user does let go of the button the "event" variable fetches which button it is and passes it to the function "keyUp" as an argument
-};
-function myFunction(event) {
-    var x = event.which || event.keyCode;
-    document.getElementsByClassName("button").innerHTML = + x; 
+var isLeftPressed = 0;
+var isRightPressed = 0;
+var isUpPressed = 0;
+var isDownPressed = 0;
+var elsePressed = 0;
 
-var btnPressed = false; //Variable to track if the user is currently pressing down a button
-
-function keypress(event) { //This function performs certain actions when a user presses down certain buttons
-
-    var key = event.key; //Gets the key on the keyboard to check if something should be done
-    
-    
-
-    if(!btnPressed) { //If any other button is not allready pressed, continue
-
-        //Drive forwards
-        if (keyup == true || key == "38") { //Check if the key "up" is pressed, here we have to check of the small and capital letter because they are not the same
-            changeDriveState(1); //Change the boolean which decides if the car drives forwards or backwards (this sends it to the server which tells the car)
-            btnPressed = true; //Set button pressed to true so that no other button can be pressed
-            console.log("hhhhh");
-        }
-
-        //Drive left
-        if (key == "LEFT" || key == "37") { //Same logic as earlier
-            changeTurnState(1); //Change the boolean which decides if the car drives left or right (this sends it to the server which tells the car)
-            btnPressed = true;
-        }
-
-        //Drive backwards
-        if (key == "BACK" || key == "40") {
-            changeDriveState(0);
-            btnPressed = true;
-        }
-
-        //Drive right
-        if (key == "RIGHT" || key == "39") {
-            changeTurnState(0);
-            btnPressed = true;
-        }
-
-        //Stop the car
-        if (key == " ") {
-            console.log("Space pressed, emergency stop"); //Console.log can be used for debugging, much like serial.print in Arduino
-            changeStopState(0); //Changes the boolean that tells the engine to come to a complete stop (this sends it to the server which tells the car)
-            btnPressed = true;
-
-        }
-    }
-
+function emitControlMouse() {
+    socket.emit('zumoDirectControl', {
+        UP: isUpPressed,
+        DOWN: isDownPressed,
+        RIGHT: isRightPressed,
+        LEFT: isLeftPressed
+    });
+    console.log("UP: ", isUpPressed, "   DOWN: ", isDownPressed, "  LEFT: ", isLeftPressed, "  RIGHT: ", isRightPressed);
 }
 
-function keyUp(event) { //Same logic as earlier, just that in this case we check if the button is let go (go upwards)
+$(document).keydown(function(e) {
+    if (e.which == 37) {
+        isLeftPressed = 1;
+    } else if (e.which == 38) {
+        isUpPressed = 1;
+    } else if (e.which == 39) {
+        isRightPressed = 1;
+    } else if (e.which == 40) {
+        isDownPressed = 1;
+    } else if (e.which == 66) {
+        toggleBtn.className = "w3-button w3-grey w3-border w3-border-black w3-large";
+    } else {
+        elsePressed = 1;
+    }
+    if (!elsePressed) {
+        socket.emit('zumoDirectControl', {
+            UP: isUpPressed,
+            DOWN: isDownPressed,
+            RIGHT: isRightPressed,
+            LEFT: isLeftPressed
+        });
+        console.log("UP: ", isUpPressed, "   DOWN: ", isDownPressed, "  LEFT: ", isLeftPressed, "  RIGHT: ", isRightPressed);
+    }
+});
 
-    var key = event.key;
-
-    //Forward
-    if(key == "w" || key == "38") {
+$(document).keyup(function(e) {
+    if (e.which == 37) {
+        isLeftPressed = 0;
+    } else if (e.which == 38) {
+        isUpPressed = 0;
+    } else if (e.which == 39) {
+        isRightPressed = 0;
+    } else if (e.which == 40) {
+        isDownPressed = 0;
     }
 
-    //Left
-    if(key == "" || key == "37") {
-        
+    if (!elsePressed) {
+        socket.emit('zumoDirectControl', {
+            UP: isUpPressed,
+            DOWN: isDownPressed,
+            RIGHT: isRightPressed,
+            LEFT: isLeftPressed
+        });
+        console.log("UP: ", isUpPressed, "   DOWN: ", isDownPressed, "  LEFT: ", isLeftPressed, "  RIGHT: ", isRightPressed);
+    } else {
+        elsePressed = 0;
     }
+});
 
-    //Backward
-    if(key == "" || key == "40") {
-        
-    }
+$(keyleft).mousedown(function() {
+    isLeftPressed = 1;
+    emitControlMouse();
+});
 
-    //Right
-    if(key == "" || key == "39") { //All of these specific key functions only alter the webpage element
-        
-    }
+$(keyleft).mouseup(function() {
+    isLeftPressed = 0;
+    emitControlMouse();
+});
 
-    btnPressed = false;
-    console.log("Key let go, stopping car");
-    changeStopState(0); //In all of the cases above, when the keys are let go, the car should stop. Therefore we just call the stop function at the end.
+$(keyright).mousedown(function() {
+    isRightPressed = 1;
+    emitControlMouse();
+});
 
-}
-}
+$(keyright).mouseup(function() {
+    isRightPressed = 0;
+    emitControlMouse();
+});
+
+$(keyup).mousedown(function() {
+    isUpPressed = 1;
+    emitControlMouse();
+});
+
+$(keyup).mouseup(function() {
+    isUpPressed = 0;
+    emitControlMouse();
+});
+
+$(keydown).mousedown(function() {
+    isDownPressed = 1;
+    emitControlMouse();
+});
+
+$(keydown).mouseup(function() {
+    isDownPressed = 0;
+    emitControlMouse();
+});
+
+
